@@ -1,13 +1,47 @@
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Edge;
+using System;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+
 namespace Selenium
 {
-	public class main
+	public class TestApp
 	{
-		public void Setup()
+
+		protected IWebDriver driver;
+
+		[SetUp]
+		public void CreateDriver()
+		
 		{
-			var driver = new OpenQA.Selenium.Chrome.ChromeDriver(@"\webdrivers");
+			Console.WriteLine("Creating Driver");
+			new DriverManager().SetUpDriver(new EdgeConfig());
+			driver = new EdgeDriver();
+
+		}
+
+		public void QuitDrivers()
+		{
+			driver.Quit();
+		}
+
+		[Test]
+		public void ChromeSession()
+		{
 			driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
 
+			var title = driver.Title;
+			Assert.AreEqual("ToolsQA", title);
 
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			var firstname = driver.FindElement(By.Id("firstName"));
+			firstname.SendKeys("Leon");
+
+			
 		}
 	}
 }
