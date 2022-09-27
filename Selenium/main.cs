@@ -47,6 +47,9 @@ namespace Selenium
 			var userEmail = driver.FindElement(By.Id("userEmail"));
 			userEmail.SendKeys("leon.wichern@hotmail.com");
 
+			var gender = driver.FindElement(By.Id("gender-radio-3"));
+			gender.SendKeys(Keys.Space);
+
 
 			
 		}
