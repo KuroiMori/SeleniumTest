@@ -13,6 +13,11 @@ namespace Selenium
 
 		protected IWebDriver driver;
 
+		public IWebElement FindById(string Id)
+		{
+			return driver.FindElement(By.Id(Id));
+		}
+
 		[SetUp]
 		public void CreateDriver()
 		
@@ -29,7 +34,7 @@ namespace Selenium
 		}
 
 		[Test]
-		public void ChromeSession()
+		public void EdgeSession()
 		{
 			driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
 
@@ -38,20 +43,29 @@ namespace Selenium
 
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			var firstName = driver.FindElement(By.Id("firstName"));
+			var firstName = FindById("firstName");
 			firstName.SendKeys("Leon");
 
-			var lastName = driver.FindElement(By.Id("lastName"));
+			var lastName = FindById("lastName");
 			lastName.SendKeys("Wichern");
 
-			var userEmail = driver.FindElement(By.Id("userEmail"));
+			var userEmail = FindById("userEmail");
 			userEmail.SendKeys("leon.wichern@hotmail.com");
 
-			var gender = driver.FindElement(By.Id("gender-radio-3"));
+			var gender = FindById("gender-radio-3");
 			gender.SendKeys(Keys.Space);
 
+			var mobileNumber = FindById("userNumber");
+			mobileNumber.SendKeys("1754861234");
 
-			
+			var dateOfBirthMonth = FindById("react-datepicker__month-select");
+			dateOfBirthMonth.SendKeys("March");
+
+			var dateOfBirthYear = FindById("react-datepicker__year-select");
+			dateOfBirthYear.SendKeys("2022");
+
+			var dateOfBirthDay = FindById("react-datepicker__week-select");
+			dateOfBirthDay.SendKeys("28");
 		}
 	}
 }
