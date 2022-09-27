@@ -44,6 +44,9 @@ namespace Selenium
 			var lastName = driver.FindElement(By.Id("lastName"));
 			lastName.SendKeys("Wichern");
 
+			var userEmail = driver.FindElement(By.Id("userEmail"));
+			userEmail.SendKeys("leon.wichern@hotmail.com");
+
 
 			
 		}
