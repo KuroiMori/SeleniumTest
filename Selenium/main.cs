@@ -38,8 +38,12 @@ namespace Selenium
 
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			var firstname = driver.FindElement(By.Id("firstName"));
-			firstname.SendKeys("Leon");
+			var firstName = driver.FindElement(By.Id("firstName"));
+			firstName.SendKeys("Leon");
+
+			var lastName = driver.FindElement(By.Id("lastName"));
+			lastName.SendKeys("Wichern");
+
 
 			
 		}
