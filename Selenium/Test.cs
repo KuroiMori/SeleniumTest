@@ -9,7 +9,7 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace Selenium
 {
-	public class TestApp
+	public class Test
 	{
 
 		protected IWebDriver driver;
@@ -31,22 +31,16 @@ namespace Selenium
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 		}
 
-		[TearDown]
+		
+		//[TearDown]
 		public void QuitDrivers()
 		{
 			driver.Quit();
 		}
 
-		public void setup()
-		{
-			
-		}
-
 		[Test]
 		public void firstNameTest()
 		{
-			setup();
-
 			var firstName = FindById("firstName");
 			firstName.SendKeys("Leon");
 		}
@@ -96,7 +90,8 @@ namespace Selenium
 		public void subjectTest()
 		{
 			var subjectInput = FindById("subjectsInput");
-			subjectInput.SendKeys("Computer Science" + Keys.Enter);
+			subjectInput.SendKeys("Computer Science");
+			subjectInput.SendKeys(Keys.Enter);
 		}
 
 		[Test]
@@ -134,6 +129,62 @@ namespace Selenium
 
 			var city = FindById("react-select-4-input");
 			city.SendKeys("Delhi" + Keys.Enter);
+		}
+
+		[Test]
+		public void completeFormTest()
+		{
+			var firstName = FindById("firstName");
+			firstName.SendKeys("Leon");
+
+			var lastName = FindById("lastName");
+			lastName.SendKeys("Wichern");
+		
+			var userEmail = FindById("userEmail");
+			userEmail.SendKeys("leon.wichern@hotmail.com");
+
+			var gender = FindById("gender-radio-3");
+			gender.SendKeys(Keys.Space);
+
+			var mobileNumber = FindById("userNumber");
+			mobileNumber.SendKeys("1754861234");
+
+			var dateOfBirthPicker = FindById("dateOfBirthInput");
+			dateOfBirthPicker.SendKeys("28 Mar 2003" + Keys.Enter);
+
+			for (var i = 0; i < 4; i++)
+			{
+				dateOfBirthPicker.SendKeys(Keys.Backspace);
+			}
+
+			dateOfBirthPicker.SendKeys("03");
+
+			var subjectInput = FindById("subjectsInput");
+			subjectInput.SendKeys("Computer Science" );
+			subjectInput.SendKeys(Keys.Enter);
+		
+			var hobbies2 = FindById("hobbies-checkbox-2");
+			hobbies2.SendKeys(Keys.Space);
+
+			var hobbies3 = FindById("hobbies-checkbox-3");
+			hobbies3.SendKeys(Keys.Space);
+		
+			var picture = FindById("uploadPicture");
+			picture.SendKeys("C:\\Users\\leonw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
+		
+			var address = FindById("currentAddress");
+			address.SendKeys("Lutherstr. 33");
+		
+			var state = FindById("react-select-3-input");
+			state.SendKeys("NCR");
+			state.SendKeys(Keys.Enter);
+			 
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(10000);
+
+			var city = FindById("react-select-4-input");
+			city.SendKeys("Delhi" + Keys.Enter);
+
+			FindById("submit").SendKeys(Keys.Space);
 		}
 	}
 }
