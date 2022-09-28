@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using System;
+using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -58,17 +59,29 @@ namespace Selenium
 			var mobileNumber = FindById("userNumber");
 			mobileNumber.SendKeys("1754861234");
 
-			var dateOfBirthMonth = FindById("react-datepicker__month-select");
-			dateOfBirthMonth.SendKeys("March");
+			var dateOfBirthPicker = FindById("dateOfBirthInput");
+			dateOfBirthPicker.SendKeys("28 Mar 2003");
+			dateOfBirthPicker.SendKeys(Keys.Enter);
 
-			var dateOfBirthYear = FindById("react-datepicker__year-select");
-			dateOfBirthYear.SendKeys("2022");
+			for (var i = 0; i < 4; i++)
+			{
+				dateOfBirthPicker.SendKeys(Keys.Backspace);
+			}
 
-			var dateOfBirthDay = FindById("react-datepicker__week-select");
-			dateOfBirthDay.SendKeys("28");
+			dateOfBirthPicker.SendKeys("03");
 
-			var subjectInput = FindById("subjectInput");
+			var subjectInput = FindById("subjectsInput");
 			subjectInput.SendKeys("Computer Science");
+			subjectInput.SendKeys(Keys.Enter);
+
+			var hobbies2 = FindById("hobbies-checkbox-2");
+			hobbies2.SendKeys(Keys.Space);
+
+			var hobbies3 = FindById("hobbies-checkbox-3");
+			hobbies3.SendKeys(Keys.Space);
+
+			var picture = FindById("uploadPicture");
+			picture.SendKeys("C:\\Users\\leonw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
 		}
 	}
 }
