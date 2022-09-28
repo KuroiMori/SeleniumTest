@@ -31,10 +31,29 @@ namespace Selenium
 		[SetUp]
 		public void CreateDriver()
 		{
-			//new DriverManager().SetUpDriver(new EdgeConfig());
-			//new EdgeDriver();
+			new DriverManager().SetUpDriver(new EdgeConfig());
 			new DriverManager().SetUpDriver(new ChromeConfig());
-			driver = new ChromeDriver();
+			new DriverManager().SetUpDriver(new FirefoxConfig());
+
+			string usedBrowser = "Firefox";
+
+			switch (usedBrowser)
+			{
+				case "Edge":
+					driver = new EdgeDriver();
+					break;
+
+				case "Chrome":
+					driver = new ChromeDriver();
+					break;
+
+				case "Firefox":
+					driver = new FirefoxDriver();
+					break;
+
+				default:
+					break;
+			}
 
 			driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
@@ -124,7 +143,7 @@ namespace Selenium
 		public void addressTextTest()
 		{
 			var address = FindById("currentAddress");
-			address.SendKeys("Musterstr.. 33");
+			address.SendKeys("Musterstr. 33");
 		}
 
 		[Test]
@@ -179,7 +198,7 @@ namespace Selenium
 			hobbies3.SendKeys(Keys.Space);
 		
 			var picture = FindById("uploadPicture");
-			picture.SendKeys("C:\\Users\\Maxw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
+			picture.SendKeys("C:\\Users\\leonw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
 		
 			var address = FindById("currentAddress");
 			address.SendKeys("Musterstr. 33");
