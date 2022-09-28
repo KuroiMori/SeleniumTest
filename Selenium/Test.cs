@@ -1,7 +1,9 @@
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.IO;
 using WebDriverManager;
@@ -11,9 +13,16 @@ namespace Selenium
 {
 	public class Test
 	{
-
+		/// <summary>
+		/// Shortcut variable for the web driver.
+		/// </summary>
 		protected IWebDriver driver;
 
+		/// <summary>
+		/// Finds an IWebElement by it's ID in the HTML file.
+		/// </summary>
+		/// <param name="Id"> ID in the HTML file</param>
+		/// <returns>IWebElement with specified ID</returns>
 		public IWebElement FindById(string Id)
 		{
 			return driver.FindElement(By.Id(Id));
@@ -21,11 +30,11 @@ namespace Selenium
 
 		[SetUp]
 		public void CreateDriver()
-		
 		{
-			Console.WriteLine("Creating Driver");
-			new DriverManager().SetUpDriver(new EdgeConfig());
-			driver = new EdgeDriver();
+			//new DriverManager().SetUpDriver(new EdgeConfig());
+			//new EdgeDriver();
+			new DriverManager().SetUpDriver(new ChromeConfig());
+			driver = new ChromeDriver();
 
 			driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
@@ -42,21 +51,21 @@ namespace Selenium
 		public void firstNameTest()
 		{
 			var firstName = FindById("firstName");
-			firstName.SendKeys("Leon");
+			firstName.SendKeys("Max");
 		}
 
 		[Test]
 		public void lastNameTest()
 		{
 			var lastName = FindById("lastName");
-			lastName.SendKeys("Wichern");
+			lastName.SendKeys("Mustermann");
 		}
 
 		[Test]
 		public void emailTest()
 		{
 			var userEmail = FindById("userEmail");
-			userEmail.SendKeys("leon.wichern@hotmail.com");
+			userEmail.SendKeys("Max.Mustermann@hotmail.com");
 		}
 
 		[Test]
@@ -70,7 +79,7 @@ namespace Selenium
 		public void phoneTest()
 		{
 			var mobileNumber = FindById("userNumber");
-			mobileNumber.SendKeys("1754861234");
+			mobileNumber.SendKeys("1234564212");
 		}
 
 		[Test]
@@ -108,14 +117,14 @@ namespace Selenium
 		public void pictureTest()
 		{
 			var picture = FindById("uploadPicture");
-			picture.SendKeys("C:\\Users\\leonw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
+			picture.SendKeys("C:\\Users\\MaxM\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
 		}
 
 		[Test]
 		public void addressTextTest()
 		{
 			var address = FindById("currentAddress");
-			address.SendKeys("Lutherstr. 33");
+			address.SendKeys("Musterstr.. 33");
 		}
 
 		[Test]
@@ -135,19 +144,19 @@ namespace Selenium
 		public void completeFormTest()
 		{
 			var firstName = FindById("firstName");
-			firstName.SendKeys("Leon");
+			firstName.SendKeys("Max");
 
 			var lastName = FindById("lastName");
-			lastName.SendKeys("Wichern");
+			lastName.SendKeys("Mustermann");
 		
 			var userEmail = FindById("userEmail");
-			userEmail.SendKeys("leon.wichern@hotmail.com");
+			userEmail.SendKeys("Max.Mustermann@hotmail.com");
 
 			var gender = FindById("gender-radio-3");
 			gender.SendKeys(Keys.Space);
 
 			var mobileNumber = FindById("userNumber");
-			mobileNumber.SendKeys("1754861234");
+			mobileNumber.SendKeys("1234564212");
 
 			var dateOfBirthPicker = FindById("dateOfBirthInput");
 			dateOfBirthPicker.SendKeys("28 Mar 2003" + Keys.Enter);
@@ -170,10 +179,10 @@ namespace Selenium
 			hobbies3.SendKeys(Keys.Space);
 		
 			var picture = FindById("uploadPicture");
-			picture.SendKeys("C:\\Users\\leonw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
+			picture.SendKeys("C:\\Users\\Maxw\\source\\repos\\KuroiMori\\SeleniumTest\\Selenium\\picture\\testPicture.jpg");
 		
 			var address = FindById("currentAddress");
-			address.SendKeys("Lutherstr. 33");
+			address.SendKeys("Musterstr. 33");
 		
 			var state = FindById("react-select-3-input");
 			state.SendKeys("NCR");
