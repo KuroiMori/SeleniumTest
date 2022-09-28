@@ -66,6 +66,9 @@ namespace Selenium
 
 			var dateOfBirthDay = FindById("react-datepicker__week-select");
 			dateOfBirthDay.SendKeys("28");
+
+			var subjectInput = FindById("subjectInput");
+			subjectInput.SendKeys("Computer Science");
 		}
 	}
 }
